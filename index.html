@@ -119,31 +119,86 @@
         return;
       }
 
-      const options = {
-        "key": "@pardeep8149", // Replace with your key
-        "amount": amount*100, // in paise
-        "currency": "INR",
-        "name": "Artillery Centre Nasik",
-        "description": "Application Fee Payment",
-        "image": "logo.png",
-        "handler": function(response){
-          alert("Payment Successful! Razorpay Payment ID: " + response.razorpay_payment_id);
-          document.getElementById('feeForm').reset();
-          document.getElementById('amount').value = "700";
-        },
-        "prefill": { "name":name, "email":email, "contact":mobile },
-        "theme": { "color":"#0b5fff" },
-        "method": {
-          "card": true,
-          "netbanking": true,
-          "upi": true,
-          "wallet": true
-        }
-      };
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Artillery Centre Nasik - Fee Payment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #222;
+      text-align: center;
+      padding: 40px;
+    }
+    .bank-box {
+      background: white;
+      display: inline-block;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      max-width: 420px;
+      text-align: left;
+    }
+    h2 {
+      color: #003366;
+      text-align: center;
+    }
+    .qr {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .proof input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>Pay Application Fee – Artillery Centre Nasik</h2>
+  <div class="bank-box">
+    <h3>Direct Bank Transfer / UPI Payment</h3>
+    <p><b>Account Holder Name:</b> Artillary Centre Nasik </p>
+    <p><b>Bank Name:</b> State Bank of India</p>
+    <p><b>Account Number:</b> 43702625369</p>
+    <p><b>IFSC Code:</b> SBIN0050110</p>
+    <p><b>UPI ID:</b> 8950368365-2@ibl</p>
 
-      const rzp = new Razorpay(options);
-      rzp.open();
-    });
-  </script>
+    <div class="qr">
+      <img src="upi_qr.png" alt="UPI QR Code" width="200">
+      <p>Scan this QR code to pay via any UPI app</p>
+    </div>
+
+    <hr>
+
+    <div class="proof">
+      <p><b>After payment, please upload your payment proof or UTR number below:</b></p>
+      <form action="submit_payment_proof.php" method="POST" enctype="multipart/form-data">
+        <label>UTR / Transaction ID:</label>
+        <input type="text" name="utr" placeholder="Enter UTR / Transaction ID" required><br>
+        <label>Upload Screenshot:</label>
+        <input type="file" name="screenshot" accept="image/*" required><br>
+        <button type="submit">Submit Payment Proof</button>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
